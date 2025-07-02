@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - Sumit's Server</title>
+</head>
+<body>
+    <h1>👑 Admin Panel 👑</h1>
+    <h2>Player List</h2>
+
+    <table border="1">
+        <tr>
+            <th>Player</th>
+            <th>Tickets</th>
+            <th>VIP</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for player, data in players.items() %}
+        <tr>
+            <td>{{ player }}</td>
+            <td>{{ data.tickets }}</td>
+            <td>{{ 'Yes' if data.vip else 'No' }}</td>
+            <td>
+                <a href="/give_vip/{{player}}">Give VIP</a> |
+                <a href="/remove_vip/{{player}}">Remove VIP</a> |
+                <a href="/delete/{{player}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add Tickets</h2>
+    <form method="POST" action="/give_tickets">
+        Player: <input name="player" required>
+        Amount: <input type="number" name="amount" required>
+        <input type="submit" value="Give Tickets">
+    </form>
+
+</body>
+</html>
